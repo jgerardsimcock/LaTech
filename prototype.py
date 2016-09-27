@@ -26,7 +26,7 @@ class Variable(object):
 	this configuration should work.
 
 	'''
-	def __init__(self, value, symbolic=None):
+	def __init__(self, value=None, symbolic=None, operations=[]):
 		self.value=value
 
 		if symbolic is None:
@@ -37,14 +37,18 @@ class Variable(object):
 
 
 		self._symbolic=symbolic
+		self.operations = operations
 
 	def __repr__(self):
 		return self.value.__repr__()
 
+	def latex(self):
+		display(Latex('${}$'.format(self.symbolic)))
+
 	@staticmethod
 	def _coerce(value):
 		if not isinstance(value, Variable):
-			return Variable(value)
+			return Variable(value, None, [])
 		return value
 
 	@property
@@ -72,12 +76,26 @@ class Variable(object):
 
 	def __add__(self, other):
 		other = self._coerce(other)
-		return Variable(self.value + other.value, '{} + {}'.format(self.symbolic, other.symbolic))
+		def oper(val=None):
+			if val is None:
+				if hasattr(val, 'copy'):
+					val = self.value.copy()
+				else:
+					val = self.value
+			return val + other.compute()
+		return Variable(None, '{} + {}'.format(self.symbolic, other.symbolic), self.operations + [oper])
 
 
 	def __radd__(self, other):
 		other = self._coerce(other)
-		return Variable(other.value + self.value, '{} + {}'.format(other.symbolic, self.symbolic))
+		def oper(val=None):
+			if val is None:
+				if hasattr(val, 'copy'):
+					val = self.value.copy()
+				else:
+					val = self.value
+			return other.compute() + val
+		return Variable(None, '{} + {}'.format(other.symbolic, self.symbolic), self.operations + [oper])
 
 
 	def __iadd__(self, other):
@@ -86,12 +104,26 @@ class Variable(object):
 
 	def __sub__(self, other):
 		other = self._coerce(other)
-		return Variable(self.value - other.value, '{} - {}'.format(self.symbolic, other.symbolic))
+		def oper(val=None):
+			if val is None:
+				if hasattr(val, 'copy'):
+					val = self.value.copy()
+				else:
+					val = self.value
+			return val - other.compute()
+		return Variable(None, '{} - {}'.format(self.symbolic, other.symbolic), self.operations + [oper])
 
 
 	def __rsub__(self, other):
 		other = self._coerce(other)
-		return Variable(other.value - self.value, '{} - {}'.format(other.symbolic, self.symbolic))
+		def oper(val=None):
+			if val is None:
+				if hasattr(val, 'copy'):
+					val = self.value.copy()
+				else:
+					val = self.value
+			return other.compute() - val
+		return Variable(None, '{} - {}'.format(other.symbolic, self.symbolic), self.operations + [oper])
 
 
 	def __isub__(self, other):
@@ -100,12 +132,26 @@ class Variable(object):
 
 	def __mul__(self, other):
 		other = self._coerce(other)
-		return Variable(self.value * other.value, '\\left({}\\right)\\left({}\\right)'.format(self.symbolic, other.symbolic))
+		def oper(val=None):
+			if val is None:
+				if hasattr(val, 'copy'):
+					val = self.value.copy()
+				else:
+					val = self.value
+			return val * other.compute()
+		return Variable(None, '\\left({}\\right)\\left({}\\right)'.format(self.symbolic, other.symbolic), self.operations + [oper])
 
 
 	def __rmul__(self, other):
 		other = self._coerce(other)
-		return Variable(other.value * self.value, '\\left({}\\right)\\left({}\\right)'.format(other.symbolic, self.symbolic))
+		def oper(val=None):
+			if val is None:
+				if hasattr(val, 'copy'):
+					val = self.value.copy()
+				else:
+					val = self.value
+			return other.compute() * val
+		return Variable(None, '\\left({}\\right)\\left({}\\right)'.format(other.symbolic, self.symbolic), self.operations + [oper])
 
 
 	def __imul__(self, other):
@@ -114,12 +160,26 @@ class Variable(object):
 
 	def __div__(self, other):
 		other = self._coerce(other)
-		return Variable(self.value / other.value, '\\frac{{\\left({}\\right)}}{{\\left({}\\right)}}'.format(self.symbolic, other.symbolic))
+		def oper(val=None):
+			if val is None:
+				if hasattr(val, 'copy'):
+					val = self.value.copy()
+				else:
+					val = self.value
+			return val / other.compute()
+		return Variable(None, '\\frac{{\\left({}\\right)}}{{\\left({}\\right)}}'.format(self.symbolic, other.symbolic), self.operations + [oper])
 
 
 	def __rdiv__(self, other):
 		other = self._coerce(other)
-		return Variable(other.value / self.value, '\\frac{{\\left({}\\right)}}{{\\left({}\\right)}}'.format(other.symbolic, self.symbolic))
+		def oper(val=None):
+			if val is None:
+				if hasattr(val, 'copy'):
+					val = self.value.copy()
+				else:
+					val = self.value
+			return other.compute() / val
+		return Variable(None, '\\frac{{\\left({}\\right)}}{{\\left({}\\right)}}'.format(other.symbolic, self.symbolic), self.operations + [oper])
 
 
 	def __idiv__(self, other):
@@ -128,12 +188,26 @@ class Variable(object):
 
 	def __pow__(self, other):
 		other = self._coerce(other)
-		return Variable(self.value ** other.value, '{{\\left({}\\right)}}^{{\\left({}\\right)}}'.format(self.symbolic, other.symbolic))
+		def oper(val=None):
+			if val is None:
+				if hasattr(val, 'copy'):
+					val = self.value.copy()
+				else:
+					val = self.value
+			return val ** other.compute()
+		return Variable(None, '{{\\left({}\\right)}}^{{\\left({}\\right)}}'.format(self.symbolic, other.symbolic), self.operations + [oper])
 
 
 	def __rpow__(self, other):
 		other = self._coerce(other)
-		return Variable(other.value ** self.value, '{{\\left({}\\right)}}^{{\\left({}\\right)}}'.format(other.symbolic, self.symbolic))
+		def oper(val=None):
+			if val is None:
+				if hasattr(val, 'copy'):
+					val = self.value.copy()
+				else:
+					val = self.value
+			return other.compute() ** val
+		return Variable(None, '{{\\left({}\\right)}}^{{\\left({}\\right)}}'.format(other.symbolic, self.symbolic), self.operations + [oper])
 
 
 	def __ipow__(self, other):
@@ -141,26 +215,39 @@ class Variable(object):
 
 
 	def sum(self, dim=None):
-		return Variable(self.value.sum(dim=dim), '\\sum{}{{\\left\\{{{}\\right\\}}}}'.format(('_{{{}}}'.format(dim) if dim is not None else ''), self.symbolic))
+		def oper(val=None):
+			if val is None:
+				if hasattr(val, 'copy'):
+					val = self.value.copy()
+				else:
+					val = self.value
+			return val.sum(dim=dim)
+		return Variable(None, '\\sum{}{{\\left\\{{{}\\right\\}}}}'.format(('_{{{}}}'.format(dim) if dim is not None else ''), self.symbolic), self.operations + [oper])
 
 	def ln(self):
-		return Variable(np.log(self.value), '\\ln{{\\left({}\\right)}}'.format(self.symbolic))
+		def oper(val=None):
+			if val is None:
+				if hasattr(val, 'copy'):
+					val = self.value.copy()
+				else:
+					val = self.value
+			return np.log(val)
+		return Variable(None, '\\ln{{\\left({}\\right)}}'.format(self.symbolic), self.operations + [oper])
 
 	def get_symbol(self):
 		return self.attrs['symbol'] + '_{{{}}}'.format(','.join(self.value.dims))
 
-	def equation(self):
-		return '{} = {}'.format(self.get_symbol(), self.symbolic)
-    
-	def display(self):
-		display(Latex('${}$'.format(self.equation())))
-
-	def compute(self):
+	def compute(self, symbolic=''):
 		'''
 		right now, this just returns the value
 		'''
 
-		return self.value
+		value = self.value
+		
+		for oper in self.operations:
+			value = oper(value)
+
+		return Variable(value, self.symbolic, [])
 
 def get_random_variable(dims):
 	data = np.random.random(tuple([len(d[1]) for d in dims]))
