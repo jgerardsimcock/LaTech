@@ -25,7 +25,7 @@ api = prototype.ClimateImpactLabDataAPI(
 api.configure(sample='median', location='OSDC', priority='low')
 ```
 
-    API configuration updated
+API configuration updated
     
 
 ## Retrieve formatted Climate Impact Lab variables
@@ -56,7 +56,7 @@ temp.attrs
 
 
 
-    OrderedDict([('symbol', 'T'), ('description', 'NASA downscaled climate data')])
+``OrderedDict([('symbol', 'T'), ('description', 'NASA downscaled climate data')])``
 
 
 
