@@ -81,8 +81,9 @@ betahat.symbol = '\\hat{{\\beta}}'
 betahat.display()
 ```
 
+![betahat][]
 
-$\hat{{\beta}}_{bins,adm2,time} = \alpha_{bins} + \left({{\gamma_1}}_{bins}\right)\left(AvgDaysPerBin_{bins,adm2,time}\right) + \left({{\gamma_2}}_{bins}\right)\left(\ln{\left(GdpPC_{adm2,time}\right)}\right) + \left({{\gamma_3}}_{bins}\right)\left(\ln{\left(PopDensity_{adm2,time}\right)}\right)$
+[betahat]: http://latex.codecogs.com/gif.latex?%24%5Cbeta_%7Bbins%2Cadm2%2Ctime%7D%20%3D%20%5Calpha_%7Bbins%7D%20+%20%5Cleft%28%7B%7B%5Cgamma_1%7D%7D_%7Bbins%7D%5Cright%29%5Cleft%28AvgDaysPerBin_%7Bbins%2Cadm2%2Ctime%7D%5Cright%29%20+%20%5Cleft%28%7B%7B%5Cgamma_2%7D%7D_%7Bbins%7D%5Cright%29%5Cleft%28%5Cln%7B%5Cleft%28GdpPC_%7Badm2%2Ctime%7D%5Cright%29%7D%5Cright%29%20+%20%5Cleft%28%7B%7B%5Cgamma_3%7D%7D_%7Bbins%7D%5Cright%29%5Cleft%28%5Cln%7B%5Cleft%28PopDensity_%7Badm2%2Ctime%7D%5Cright%29%7D%5Cright%29%24
 
 
 
@@ -223,7 +224,9 @@ mortality.display()
 ```
 
 
-$M_{adm2,time} = \sum_{bins}{\left\{\left(\hat{{\beta}}_{bins,adm2,time}\right)\left(T_{bins,adm2,time}\right)\right\}}$
+![mortality][]
+
+[mortality]: http://latex.codecogs.com/gif.latex?%24M_%7Badm2%2Ctime%7D%20%3D%20%5Csum_%7Bbins%7D%7B%5Cleft%7B%5Cleft%28%5Chat%7B%7B%5Cbeta%7D%7D%7Bbins%2Cadm2%2Ctime%7D%5Cright%29%5Cleft%28T%7Bbins%2Cadm2%2Ctime%7D%5Cright%29%5Cright%7D%7D%24
 
 
 Note that the dimensionality of mortality is less than beta and temp in the LaTeX and data:
