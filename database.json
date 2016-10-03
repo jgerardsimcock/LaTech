@@ -386,6 +386,28 @@
 			"dims": ["GCP_INDEX_IR", "GCP_INDEX_Day365","GCP_INDEX_TempBinMortality"],
 			"scenarios": ["GCP_SCENARIOS_ClimateProjections"]
 		},
+		"GCP_SOCIOECONOMICS_Gdppc_IR_nightlights": {
+			"uuid": "421d947a9c114942309f78bd64622937710efe87798a04095b293128021da2f2",
+			"gcp_id": "GCP_SOCIOECONOMICS_Gdppc_IR_nightlights",
+			"name": "Gdppc_IR_nightlights",
+			"latex": "y",
+			"description": "GDP per capita, ",
+			"author": "Michael Delgado",
+			"updated": "",
+			"dims": ["GCP_INDEX_IR", "GCP_INDEX_Day365"],
+			"scenarios": ["GCP_SCENARIOS_SSPs"]
+		},
+		"GCP_SOCIOECONOMICS_Poppop_IR_Landscan": {
+			"uuid": "aecba8361c37ab0e49b8a9ec6c54ff12e6a64701359758c9e42c5d32a7ce74a9",
+			"gcp_id": "GCP_SOCIOECONOMICS_Poppop_IR_Landscan",
+			"name": "Poppop_IR_Landscan",
+			"latex": "p",
+			"description": "Population weighted population density, derived from SSP country-level projections and distributed with landscan gridded population density",
+			"author": "Michael Delgado",
+			"updated": "",
+			"dims": ["GCP_INDEX_IR", "GCP_INDEX_Day365"],
+			"scenarios": ["GCP_SCENARIOS_SSPs"]
+		}
 	},
 	"scenarios": {
 		"GCP_SCENARIOS_ClimateProjections": {
